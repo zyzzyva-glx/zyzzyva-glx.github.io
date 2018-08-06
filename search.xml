@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[学术论文Word技巧]]></title>
+    <url>%2F2018%2F08%2F06%2F%E5%AD%A6%E6%9C%AF%E8%AE%BA%E6%96%87Word%E6%8A%80%E5%B7%A7%2F</url>
+    <content type="text"><![CDATA[本文转自新浪微博]]></content>
+      <tags>
+        <tag>Word</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[npm直接换淘宝源]]></title>
+    <url>%2F2018%2F08%2F04%2Fnpm%E7%9B%B4%E6%8E%A5%E6%8D%A2%E6%B7%98%E5%AE%9D%E6%BA%90%2F</url>
+    <content type="text"><![CDATA[由于npm原生的源在境外服务器上，所以用国内的淘宝源会快一些。 如果用cnpm的模式话，相当于软链接的方式，会出现一些错误，比如卸载模块的时候会导致hexo命令不能用，并且node_modules文件夹下会出现快捷方式。 因此采用直接将npm的源换为淘宝的源，就可以直接使用npm命令，也不会出现上述错误。 全局切换方式为 1npm config set registry https://registry.npm.taobao.org/ 查看当前源 1npm config get registry 临时切换方式为 1npm --registry http://registry.cnpmjs.org]]></content>
+      <tags>
+        <tag>npm</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo渲染排除]]></title>
+    <url>%2F2018%2F08%2F02%2FHexo%E6%B8%B2%E6%9F%93%E6%8E%92%E9%99%A4%2F</url>
+    <content type="text"><![CDATA[转自https://www.maoxuner.cn/2017/03/10/hexo-skip-render.html 搜索引擎确认网站所有权时往往会提供一个html文件来进行验证，要是这个文件被渲染了，验证自然就会失败了。或者，有时候会写一些简单的html示例页面，这也是不希望Hexo渲染的。因此有必要针对某个文件或者目录进行排除。Hexo的配置文件中提供了配置项skip_render，但总不清楚到底该怎么用。 注意只有source目录下的文件才会发布到public（能够在网络上访问到），因此Hexo只渲染source目录下的文件。skip_render参数设置的路径是相对于source目录的路径。 设置排除项假设source目录下的文件如以下目录树所示123456789101112├─ demo| ├─ js-view-size| | ├─ 1.html| | └┈ 2.html| ├─ other| | ├─ 3.html| | ├─ 4.html| | └┈ 5.md| ├─ 6.html| └┈ 7.md├─ baidu.html└┈ google.html 排除单个文件 排除baidu.html 1skip_render: 'baidu.html' 排除3.html 1skip_render: 'demo/other/3.html' 排除多个文件 排除baidu.html和google.html 123skip_render: - 'baidu.html' - 'google.html' 或者 1skip_render: '*.html' 后者会排除source目录下所有后缀为html的文件，但是不会排除子目录如demo及其子目录中的html文件。 排除baidu.html和google.html以及3.html 1234skip_render: - 'baidu.html' - 'google.html' - 'demo/other/3.html' 或者 123skip_render: - '*.html' - 'demo/other/3.html' 排除source/demo/other目录中的所有html文件 1skip_render: 'demo/other/*.html' 这不会排除5.md文件 排除source/demo/other目录中的所有文件 1skip_render: 'demo/other/**' 排除baidu.html和google.html以及整个source/demo目录 123skip_render: - '*.html' - 'demo/**' 排除所有特定后缀的文件，暂且不知道如何设置。 参考文章 Hexo技巧收集 - 不定期更新]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo渲染时排除部分文件或目录]]></title>
+    <url>%2F2018%2F08%2F02%2FHexo%E6%B8%B2%E6%9F%93%E6%97%B6%E6%8E%92%E9%99%A4%E9%83%A8%E5%88%86%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[转自https://blog.csdn.net/ganzhilin520/article/details/79057774 我们知道，在 source 文件夹下的所有 md 文件或者 html 文件都会被渲染，有时候我们不想这些文件被渲染怎么办？比如很多时候我们想要写一个 README.md 或者一些自定义的页面。比如百度或者谷歌在验证站长权限的时候，通常都会要求在主目录下添加一个 html 文件。 不渲染 md 文件 使用上面的办法虽然不会渲染 md 文件，但是还是将 md 文件转化成了 html 文件，如果想保留原 md 文件后缀要怎么做呢？这就需要在 站点配置文件 _config.yml 中配置，找到 skip_render 参数，开始匹配的位置是基于你的 source_dir 的，一般来说，是你的 source 文件夹下。下面我分别列举几种常见的情况进行说明： skip_render: test/* 单个文件夹下全部文件 skip_render: test/*.md 单个文件夹下指定类型文件 skip_render: test/** 单个文件夹下全部文件以及子目录 多个文件夹以及各种复杂情况： skip_render: README.md - `test1/*.html` - `test2/**`123 不渲染 html 文件 在不想被渲染的 html 文件最上面添加如下代码 --- layout: false ---123]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[记录安装hexo环境的过程]]></title>
+    <url>%2F2018%2F08%2F02%2F%E8%AE%B0%E5%BD%95%E5%AE%89%E8%A3%85hexo%E7%8E%AF%E5%A2%83%E7%9A%84%E8%BF%87%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[整个搭建过程特别麻烦，主要在于要实现插入本地图片，插入数学公式的功能 安装与配置git 下面内容转自https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html 先从git网站上下载git程序，安装。 打开git bash，配置SSH密钥ssh-keygen -t rsa -C &quot;邮件地址&quot;，对应的邮件地址是注册github的邮件地址。在C盘的用户目录下找到.ssh\id_rsa.pub文件，打开文件，复制里面的内容。打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key： 将刚复制的内容粘贴到key那里，title随便填，保存。 测试是否成功。输入ssh -T git@github.com # 注意邮箱地址不用改，如果出现You&#39;ve successfully authenticated, but GitHub does not provide shell access.，字样，就说明SSH密钥配置成功了。此外还需要配置： 12git config --global user.name "xxxxxx"// 你的github用户名，非昵称git config --global user.email "xxx@qq.com"// 填写你的github注册邮箱 安装Node.js 在官网上下载安装Node.js 由于原生的npm源在境外服务器上，在国内访问特别慢，所以可以使用淘宝的npm源： 1npm install -g cnpm --registry=https://registry.npm.taobao.org 在以后使用npm的时候，都可以替换成cnpm。 安装Hexo直接参考Hexo官方文档的教程，输入命令 1npm install -g hexo-cli 配置Hexo 首先建立一个空文件夹（如myHexo），作为博客的目录。 进入该文件夹，右键Git Bash here。保持这个窗口打开，后面步骤的命令都在这里输入。 在窗口中输入hexo init，该步骤初始化博客目录，时间较长，会从github上下载一些东西。 此时在myHexo目录下会生成有package.json文件，打开该文件，如果在dependencies中有hexo-renderer-marked 字段，则需要把这个依赖替换为hexo-renderer-kramed。因为hexo-renderer-marked渲染引擎默认不支持MathJax渲染。 在git bash窗口中输入npm install，记住，必须在步骤4之后再输入这条命令，否则之后的会报错。 安装deploy组件npm install hexo-deployer-git --save，用于向github上部署博客。在_config.yml文件中加入如下内容，这些是github项目的有关信息。 1234deploy: type: git repository: git@github.com:zyzzyva-glx/zyzzyva-glx.github.io.git branch: master 安装配置本地图片上传插件hexo-asset-image 输入命令npm install hexo-asset-image --save， 安装图片上传插件 在_config.yml文件中，把post_asset_folder的值由false改为true 安装配置数学公式 下面内容转自https://www.jianshu.com/p/e8d433a2c5b7 更改myHexo/node_modules/hexo-renderer-kramed/lib/renderer.js，把 12345// Change inline math rulefunction formatText(text) &#123; // Fit kramed's rule: $$ + \1 + $$ return text.replace(/`\$(.*?)\$`/g, '$$$$$1$$$$');&#125; 改为： 1234// Change inline math rulefunction formatText(text) &#123; return text;&#125; 如果已经安装了hexo-math这个插件，需要把它卸载掉，如果没有则跳过这一步。 1npm uninstall hexo-math --save 安装 hexo-renderer-mathjax 插件 1npm install hexo-renderer-mathjax --save 更新 Mathjax 的 CDN 链接，因为国内的CDN会加载得快一些。打开myHexo/node_modules/hexo-renderer-mathjax/mathjax.html，把&lt;script&gt;更改为： 1&lt;script src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"&gt;&lt;/script&gt; 更改默认转义规则。因为 hexo 默认的转义规则会将一些字符进行转义，比如 _转为 &lt;em&gt;, 所以我们需要对默认的规则进行修改。首先，打开myHexo/node_modules/kramed/lib/rules/inline.js，然后，把: 1escape: /^\\([\\`*&#123;&#125;\[\]()#$+\-.!_&gt;])/, 更改为： 1escape: /^\\([`*\[\]()# +\-.!_&gt;])/, 把： 1em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/, 更改为： 1em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/, 开启MathJax。在主题 _config.yml 中开启 Mathjax， 找到 mathjax 字段添加如下代码： 12mathjax: enable: true 这一步可选，在博客中开启 Mathjax， 添加以下内容： 123456---title: Testing Mathjax with Hexocategory: Uncategorizeddate: 2017/05/03mathjax: true---]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>hexo环境搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hhh]]></title>
+    <url>%2F2018%2F08%2F01%2Fhhh%2F</url>
+    <content type="text"><![CDATA[a=b+c \begin{eqnarray} \nabla\cdot\vec{E} &=& \frac{\rho}{\epsilon_0} \\ \nabla\cdot\vec{B} &=& 0 \\ \nabla\times\vec{E} &=& -\frac{\partial B}{\partial t} \\ \nabla\times\vec{B} &=& \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right) \end{eqnarray} [ ] ee [ ]]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2018%2F08%2F01%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
